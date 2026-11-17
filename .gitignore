@@ -1,0 +1,41 @@
+# Local reference material (MATLAB code, PDFs) - not versioned
+references/
+
+# Local working notes (decision log and agent instructions)
+journal.md
+AGENTS.md
+
+# Virtual environment
+.venv/
+venv/
+
+# Python build files and caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# Analysis results (can be regenerated)
+results/
+*.npz
+*.csv
+*.h5
+*.xmf
+*.vtp
+*.vtu
+*.pvd
+
+# Editors / operating system
+.idea/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini

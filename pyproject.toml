@@ -1,0 +1,61 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drillstring-fea"
+version = "1.0.0"
+description = "Nonlinear dynamic finite element analysis of oil-well drill strings (3D corotational beams). Implements the formulation of an MSc dissertation (PUC-Rio, 2021)."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{ name = "Luiz Pereira de Aguiar Neto" }]
+keywords = ["finite elements", "drill string", "corotational beam", "nonlinear dynamics",
+            "buckling", "oil well"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Intended Audience :: Science/Research",
+    "Intended Audience :: Education",
+    "Topic :: Scientific/Engineering",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=1.26",
+    "scipy>=1.11",
+]
+
+[project.optional-dependencies]
+plot = ["matplotlib>=3.8"]
+animation = ["pyvista>=0.44", "imageio>=2.30", "imageio-ffmpeg>=0.5", "matplotlib>=3.8"]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.urls]
+Homepage = "https://github.com/aguiarln/drillstring-fea"
+Dissertation = "https://doi.org/10.17771/PUCRio.acad.56800"
+
+[project.scripts]
+drillstring-fea = "drillstring_fea.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+drillstring_fea = ["data/*.txt"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["slow: long-running reproduction of dissertation results (run with -m slow)"]
+addopts = "-m 'not slow'"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "NPY"]
+ignore = ["E741"]
+
+[tool.ruff.lint.per-file-ignores]
+# element matrices are written as wide matrix literals, as in the dissertation
+"src/drillstring_fea/beam.py" = ["E501"]
